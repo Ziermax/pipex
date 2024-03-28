@@ -30,25 +30,32 @@ BIGREEN= \033[1;92m#	Bold Intense Green
 
 all: ${NAME}
 
-${NAME}: ${OBJ_F}
-	@ar -rc ${NAME} ${OBJ_F}
-	@echo "${BCYAN}ar -rc${DF} ${PURPLE}${NAME}${DF} ${BIGREEN}${OBJ_F}${DF}"
+${NAME}: ${OBJ}
+	ar -rc ${NAME} ${OBJ}
+#	@echo "${BCYAN}ar -rc${DF} ${PURPLE}${NAME}${DF} ${BIGREEN}${OBJ_F}${DF}"
 
-%.o: %.c Makefile
-	@${CC} ${CFLAGS} -MMD -c $<
-	@echo "${BBLUE}${CC}${DF} ${BCYAN}${CFLAGS} -MMD${DF} ${BBLUE}-c${DF} ${BIRED}$<${DF}"
+${OBJ_D}%.o: ${SRC_D}%.c Makefile ${OBJ_D} ${DEP_D}
+	${CC} ${CFLAGS} -MMD -c $< -o $@
+	mv ${@:.o=.d} ${DEP_D}
+#	@echo "${BBLUE}${CC}${DF} ${BCYAN}${CFLAGS} -MMD${DF} ${BBLUE}-c${DF} ${BIRED}$<${DF}"
+
+${OBJ_D}:
+	mkdir ${OBJ_D}
+
+${DEP_D}:
+	mkdir ${DEP_D}
 
 clean:
-	@rm -f ${OBJ_F} ${DEP_F}
-	@echo "${RED}rm -f${DF} ${BIGREEN}${OBJ_F}${DF}"
-	@echo "${RED}rm -f${DF} ${BYELLOW}${DEP_F}${DF}"
+	rm -rf ${OBJ_D} ${DEP_D}
+#	@echo "${RED}rm -f${DF} ${BIGREEN}${OBJ_F}${DF}"
+#	@echo "${RED}rm -f${DF} ${BYELLOW}${DEP_F}${DF}"
 
 fclean: clean
-	@rm -f ${NAME}
-	@echo "${RED}rm -f${DF} ${PURPLE}${NAME}${DF}"
+	rm -f ${NAME}
+#	@echo "${RED}rm -f${DF} ${PURPLE}${NAME}${DF}"
 
 re: fclean all
 
--include ${DEP_F}
+-include ${DEP}
 
 .PHONY: all clean fclean re
