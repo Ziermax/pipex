@@ -3,13 +3,13 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
 SRC_F = length.c calloc.c split.c split_char.c join.c
-SRC_D = ./src/
+SRC_D = ./sources/
 
 OBJ_F = ${SRC_F:.c=.o}
-OBJ_D = ./obj/
+OBJ_D = ./object/
 
 DEP_F = ${SRC_F:.c=.d}
-DEP_D = ./dep/
+DEP_D = ./dependencies/
 
 SRC = ${addprefix ${SRC_D}, ${SRC_F}}
 OBJ = ${addprefix ${OBJ_D}, ${OBJ_F}}
@@ -27,32 +27,36 @@ BPURPLE= \033[1;35m#	Bold Purple
 BCYAN= \033[1;36m#		Bold Cyan
 BIRED= \033[1;91m#		Bold Intense Red
 BIGREEN= \033[1;92m#	Bold Intense Green
+BBLACK=\033[1;30m#		Bold Black
 
 all: ${NAME}
 
-${NAME}: ${OBJ}
-	ar -rc ${NAME} ${OBJ}
-#	@echo "${BCYAN}ar -rc${DF} ${PURPLE}${NAME}${DF} ${BIGREEN}${OBJ_F}${DF}"
+${NAME}: ${OBJ_D} ${DEP_D} ${OBJ}
+	@ar -rc ${NAME} ${OBJ}
+	@echo "${BBLACK}ar -rc${DF} ${PURPLE}${NAME}${DF} ${BIGREEN}${OBJ_F}${DF}"
 
-${OBJ_D}%.o: ${SRC_D}%.c Makefile ${OBJ_D} ${DEP_D}
-	${CC} ${CFLAGS} -MMD -c $< -o $@
-	mv ${@:.o=.d} ${DEP_D}
-#	@echo "${BBLUE}${CC}${DF} ${BCYAN}${CFLAGS} -MMD${DF} ${BBLUE}-c${DF} ${BIRED}$<${DF}"
+${OBJ_D}%.o: ${SRC_D}%.c Makefile
+	@${CC} ${CFLAGS} -MMD -c $< -o $@
+	@echo "${BBLACK}${CC}${DF} ${BBLUE}${CFLAGS} -MMD${DF} ${BCYAN}-c${DF} ${BIRED}$<${DF} ${BCYAN}-o${DF} ${BIGREEN}$@${DF}"
+	@mv ${@:.o=.d} ${DEP_D}
+	@echo "${BBLACK}mv${DF} ${BYELLOW}${@:.o=.d}${DF} ${BCYAN}${DEP_D}${DF}"
 
 ${OBJ_D}:
-	mkdir ${OBJ_D}
+	@mkdir ${OBJ_D}
+	@echo "${BBLACK}mkdir${DF} ${BCYAN}${OBJ_D}${DF}"
 
 ${DEP_D}:
-	mkdir ${DEP_D}
+	@mkdir ${DEP_D}
+	@echo "${BBLACK}mkdir${DF} ${BCYAN}${DEP_D}${DF}"
 
 clean:
-	rm -rf ${OBJ_D} ${DEP_D}
-#	@echo "${RED}rm -f${DF} ${BIGREEN}${OBJ_F}${DF}"
-#	@echo "${RED}rm -f${DF} ${BYELLOW}${DEP_F}${DF}"
+	@rm -rf ${OBJ_D} ${DEP_D}
+	@echo "${RED}rm -f${DF} ${BIGREEN}${OBJ_F}${DF}"
+	@echo "${RED}rm -f${DF} ${BYELLOW}${DEP_F}${DF}"
 
 fclean: clean
-	rm -f ${NAME}
-#	@echo "${RED}rm -f${DF} ${PURPLE}${NAME}${DF}"
+	@rm -f ${NAME}
+	@echo "${RED}rm -f${DF} ${PURPLE}${NAME}${DF}"
 
 re: fclean all
 

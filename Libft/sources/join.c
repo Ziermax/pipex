@@ -6,12 +6,12 @@
 /*   By: mvelazqu <mvelazqu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 17:02:55 by mvelazqu          #+#    #+#             */
-/*   Updated: 2024/03/28 19:07:30 by mvelazqu         ###   ########.fr       */
+/*   Updated: 2024/03/28 19:33:16 by mvelazqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "../inc/libft.h"
+#include "../includes/libft.h"
 
 char	*ft_strjoin(char *str1, char *str2)
 {
