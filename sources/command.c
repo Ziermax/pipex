@@ -6,12 +6,25 @@
 /*   By: mvelazqu <mvelazqu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 13:00:24 by mvelazqu          #+#    #+#             */
-/*   Updated: 2024/03/29 14:10:29 by mvelazqu         ###   ########.fr       */
+/*   Updated: 2024/03/29 17:27:55 by mvelazqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 #include "../Libft/includes/libft.h"
+
+int	command_len(t_cmd *command)
+{
+	int	len;
+
+	len = 0;
+	while (command)
+	{
+		len += 1;
+		command = command->next;
+	}
+	return (len);
+}
 
 void	free_commands(t_cmd **command_lst)
 {
@@ -25,6 +38,7 @@ void	free_commands(t_cmd **command_lst)
 	{
 		tmp = aux->next;
 		free_split(aux->command);
+		free(aux->exec_path);
 		free(aux);
 		aux = tmp;
 	}
@@ -50,26 +64,6 @@ t_cmd	*add_command(t_cmd **command_lst)
 	return (new);
 }
 
-char	*get_path(char *folder, char *program)
-{
-	char	*path;
-	int		len_p;
-	int		len_f;
-
-	len_f = 0;
-	len_p = 0;
-	while (folder[len_f])
-		len_f++;
-	while (program[len_p])
-		len_p++;
-	if (!len_p && !len_f)
-		return (NULL);
-	path = malloc(sizeof(char) * (len_p + len_f + 1));
-	if (!path)
-		return (NULL);
-	return (NULL);
-}
-
 t_cmd	*get_cmd_lst(int argc, char **argv)
 {
 	t_cmd	*command_lst;
@@ -81,7 +75,6 @@ t_cmd	*get_cmd_lst(int argc, char **argv)
 	command_lst = NULL;
 	while (i < argc)
 	{
-		printf("%d < %d\n", i , argc);
 		command_split = ft_split(argv[i]);
 		if (!command_split)
 			return (free_commands(&command_lst), NULL);
@@ -89,7 +82,13 @@ t_cmd	*get_cmd_lst(int argc, char **argv)
 		if (!new_command)
 			return (free_split(command_split), NULL);
 		new_command->command = command_split;
+		new_command->exec_path = ft_strjoin("/bin/", command_split[0]);
+		if (!new_command->exec_path)
+			return (free_commands(&command_lst), NULL);
 		i++;
 	}
 	return (command_lst);
 }
+//		printf("%d < %d\n", i, argc);
+//		printf("split: [%p]\n", command_split);
+//		printf("loop end\n");

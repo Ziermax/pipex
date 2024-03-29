@@ -6,7 +6,7 @@
 /*   By: mvelazqu <mvelazqu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 17:02:55 by mvelazqu          #+#    #+#             */
-/*   Updated: 2024/03/28 19:33:16 by mvelazqu         ###   ########.fr       */
+/*   Updated: 2024/03/29 16:54:37 by mvelazqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_strjoin(char *str1, char *str2)
 	int		len2;
 	int		i;
 
-	if (!str1 || !str2)
+	if (!str1 && !str2)
 		return (NULL);
 	len1 = ft_strlen(str1);
 	len2 = ft_strlen(str2);
