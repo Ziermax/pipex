@@ -15,6 +15,8 @@
 
 int		ft_strlen(char *str);
 int		ft_intlen(int num);
+char	*search_word_in_str(char *word, char *str);
+char	*search_word_in_split(char *word, char **split);
 void	*ft_calloc(size_t count, size_t size);
 void	free_split(char **split);
 char	*ft_strjoin(char *str1, char *str2);
