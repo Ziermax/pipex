@@ -6,7 +6,7 @@
 /*   By: mvelazqu <mvelazqu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 16:40:12 by mvelazqu          #+#    #+#             */
-/*   Updated: 2024/03/28 15:00:12 by mvelazqu         ###   ########.fr       */
+/*   Updated: 2024/03/29 14:27:17 by mvelazqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ typedef struct s_cmd
 	struct s_cmd	*next;
 }	t_cmd;
 
-void	free_split(char **split);
-char	**ft_split(char *str);
 t_cmd	*get_cmd_lst(int argc, char **argv);
 
 #endif

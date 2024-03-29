@@ -24,6 +24,8 @@ DEP = ${addprefix ${DEP_D}, ${DEP_F}}
 
 #COLOR
 
+DF = \033[0;39m#		Default
+
 # Regular Colors
 BLACK = \033[0;30m#		Black
 RED = \033[0;31m#		Red
@@ -99,15 +101,15 @@ On_IWHITE = \033[0;107m#	White
 
 all: ${NAME}
 
-${NAME}: ${SRC_D} ${DEP_D} ${OBJ} ${LIBFT}
-	@${CC} ${CFLAGS} ${OBJ} -o ${NAME}
-	@echo "${BCYAN}${CC}${DF} ${BBLUE}${CFLAGS}${DF} ${BIGREEN}${OBJ}${DF} ${BCYAN}-o${DF} ${RED}${NAME}${DF}"
+${NAME}: ${OBJ_D} ${DEP_D} ${OBJ} ${LIBFT}
+	@${CC} ${CFLAGS} ${OBJ} ${LIBFT} -o ${NAME}
+	@echo "${BCYAN}${CC}${DF} ${BBLUE}${CFLAGS}${DF} ${BIGREEN}${OBJ}${DF} ${PURPLE}${BCYAN}${DF}  ${BCYAN}-o${DF} ${RED}${NAME}${DF}"
 
 ${OBJ_D}%.o: ${SRC_D}%.c Makefile
 	@${CC} ${CFLAGS} -MMD -c $< -o $@
 	@echo "${BCYAN}${CC}${DF} ${BBLUE}${CFLAGS} -MMD${DF} ${BCYAN}-c${DF} ${BIRED}$<${DF} ${BCYAN}-o${DF} ${BIGREEN}$@${DF}"
 	@mv ${@:.o=.d} ${DEP_D}
-	@echo "${}mv${DF} ${BYELLOW}${@:.o=.d}${DF} ${BCYAN}${DEP_D}${DF}"
+	@echo "${BCYAN}mv${DF} ${BYELLOW}${@:.o=.d}${DF} ${BCYAN}${DEP_D}${DF}"
 
 ${OBJ_D}:
 	@mkdir ${OBJ_D}
@@ -118,14 +120,23 @@ ${DEP_D}:
 	@echo "${BCYAN}mkdir${DF} ${BCYAN}${DEP_D}${DF}"
 
 ${LIBFT}:
+	@echo
+	@echo "${BCYAN}### LIBFT ###${DF}"
 	@make -C Libft --no-print-directory
+	@echo "${BCYAN}###${DF} ${PURPLE}libft.a${DF} ${BCYAN}made ---${DF}"
+	@echo
 
 #<------------------------------------||-------------------------------------->#
 
 clean:
 	@rm -rf ${OBJ_D} ${DEP_D}
-	@echo "${RED}rm -rf${DF} ${BIGREEN}${OBJ}${DF}"
-	@echo "${RED}rm -rf${DF} ${BYELLOW}${DEP}${DF}"
+	@echo "${RED}rm -rf${DF} ${BIGREEN}${OBJ_F}${DF}"
+	@echo "${RED}rm -rf${DF} ${BYELLOW}${DEP_F}${DF}"
+	@echo
+	@echo "${BCYAN}### LIBFT fclean ###${DF}"
+	@make fclean -C Libft --no-print-directory
+	@echo "${BCYAN}### LIBFT cleaned ---${DF}"
+	@echo
 
 fclean: clean
 	@rm -rf ${NAME}

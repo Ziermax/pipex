@@ -6,11 +6,11 @@
 /*   By: mvelazqu <mvelazqu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 13:06:51 by mvelazqu          #+#    #+#             */
-/*   Updated: 2024/03/28 15:00:09 by mvelazqu         ###   ########.fr       */
+/*   Updated: 2024/03/29 14:02:21 by mvelazqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../includes/pipex.h"
 
 void	print_split(char **split)
 {
@@ -35,7 +35,7 @@ void	print_commands(t_cmd *commands)
 int	main(int argc, char **argv, char **envp)
 {
 	t_cmd	*command_lst;
-	int		files[2];
+//	int		files[2];
 
 	if (argc < 5)
 		return (0);
@@ -44,5 +44,6 @@ int	main(int argc, char **argv, char **envp)
 	if (!command_lst)
 		return (write(2, "Error mallocking commands\n", 26));
 	print_commands(command_lst);
-	execute_command(command_lst);
+	envp = NULL;
+//	execute_command(command_lst);
 }

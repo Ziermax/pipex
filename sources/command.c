@@ -6,11 +6,12 @@
 /*   By: mvelazqu <mvelazqu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 13:00:24 by mvelazqu          #+#    #+#             */
-/*   Updated: 2024/03/28 14:59:59 by mvelazqu         ###   ########.fr       */
+/*   Updated: 2024/03/29 14:10:29 by mvelazqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../includes/pipex.h"
+#include "../Libft/includes/libft.h"
 
 void	free_commands(t_cmd **command_lst)
 {
@@ -66,6 +67,7 @@ char	*get_path(char *folder, char *program)
 	path = malloc(sizeof(char) * (len_p + len_f + 1));
 	if (!path)
 		return (NULL);
+	return (NULL);
 }
 
 t_cmd	*get_cmd_lst(int argc, char **argv)

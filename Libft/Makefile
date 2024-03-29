@@ -6,7 +6,7 @@ SRC_F = length.c calloc.c split.c split_char.c join.c
 SRC_D = ./sources/
 
 OBJ_F = ${SRC_F:.c=.o}
-OBJ_D = ./object/
+OBJ_D = ./objects/
 
 DEP_F = ${SRC_F:.c=.d}
 DEP_D = ./dependencies/
@@ -33,21 +33,21 @@ all: ${NAME}
 
 ${NAME}: ${OBJ_D} ${DEP_D} ${OBJ}
 	@ar -rc ${NAME} ${OBJ}
-	@echo "${BBLACK}ar -rc${DF} ${PURPLE}${NAME}${DF} ${BIGREEN}${OBJ_F}${DF}"
+	@echo "${BCYAN}ar -rc${DF} ${PURPLE}${NAME}${DF} ${BIGREEN}${OBJ_F}${DF}"
 
 ${OBJ_D}%.o: ${SRC_D}%.c Makefile
 	@${CC} ${CFLAGS} -MMD -c $< -o $@
-	@echo "${BBLACK}${CC}${DF} ${BBLUE}${CFLAGS} -MMD${DF} ${BCYAN}-c${DF} ${BIRED}$<${DF} ${BCYAN}-o${DF} ${BIGREEN}$@${DF}"
+	@echo "${BCYAN}${CC}${DF} ${BBLUE}${CFLAGS} -MMD${DF} ${BCYAN}-c${DF} ${BIRED}$<${DF} ${BCYAN}-o${DF} ${BIGREEN}$@${DF}"
 	@mv ${@:.o=.d} ${DEP_D}
-	@echo "${BBLACK}mv${DF} ${BYELLOW}${@:.o=.d}${DF} ${BCYAN}${DEP_D}${DF}"
+	@echo "${BCYAN}mv${DF} ${BYELLOW}${@:.o=.d}${DF} ${BCYAN}${DEP_D}${DF}"
 
 ${OBJ_D}:
 	@mkdir ${OBJ_D}
-	@echo "${BBLACK}mkdir${DF} ${BCYAN}${OBJ_D}${DF}"
+	@echo "${BCYAN}mkdir${DF} ${BCYAN}${OBJ_D}${DF}"
 
 ${DEP_D}:
 	@mkdir ${DEP_D}
-	@echo "${BBLACK}mkdir${DF} ${BCYAN}${DEP_D}${DF}"
+	@echo "${BCYAN}mkdir${DF} ${BCYAN}${DEP_D}${DF}"
 
 clean:
 	@rm -rf ${OBJ_D} ${DEP_D}
