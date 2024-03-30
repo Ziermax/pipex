@@ -68,6 +68,22 @@ void	free_split(char **split)
 	free(split);
 }
 
+void	free_split_save(char **split, char *save)
+{
+	int	i;
+
+	if (!split)
+		return ;
+	i = 0;
+	while (split[i])
+	{
+		if (split[i] != save)
+			free(split[i]);
+		i++;
+	}
+	free(split);
+}
+
 char	**ft_split(char *str)
 {
 	char	**split;

@@ -19,7 +19,9 @@ char	*search_word_in_str(char *word, char *str);
 char	*search_word_in_split(char *word, char **split);
 void	*ft_calloc(size_t count, size_t size);
 void	free_split(char **split);
+void    free_split_save(char **split, char *save);
 char	*ft_strjoin(char *str1, char *str2);
+char    *ft_threejoin(char *str1, char *str2, char *str3);
 char	**ft_split_char(char *str, char c);
 char	**ft_split(char *str);
 
