@@ -38,6 +38,7 @@ typedef struct s_pipe
 void	print_split(char **split);
 void	free_commands(t_cmd **command_lst);
 int		command_len(t_cmd *command);
+char    *get_path(char *program, char **envp);
 t_cmd	*get_cmd_lst(int argc, char **argv);
 void	execute_command(t_cmd *commnad_lst, char **envp);
 

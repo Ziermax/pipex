@@ -76,4 +76,5 @@ void	execute_command(t_cmd *command, char **envp)
 			manage_fildes(pipes[i - 1][0], pipes[i - 1][1], -1);
 		command = command->next;
 	}
+	free_pipes(pipes);
 }

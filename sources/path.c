@@ -36,7 +36,7 @@ char	*find_correct_path(char **path)
 	return (NULL);
 }
 
-char	**get_path(char *program, char **envp)
+char	*get_path(char *program, char **envp)
 {
 	char	**split_path;
 	char	*path;

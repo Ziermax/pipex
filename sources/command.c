@@ -82,7 +82,7 @@ t_cmd	*get_cmd_lst(int argc, char **argv)
 		if (!new_command)
 			return (free_split(command_split), NULL);
 		new_command->command = command_split;
-		new_command->exec_path = ft_strjoin("/bin/", command_split[0]);
+		new_command->exec_path = get_path(command_split[0], envp);
 		if (!new_command->exec_path)
 			return (free_commands(&command_lst), NULL);
 		i++;
