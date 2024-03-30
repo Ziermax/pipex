@@ -6,7 +6,7 @@
 /*   By: mvelazqu <mvelazqu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 13:00:24 by mvelazqu          #+#    #+#             */
-/*   Updated: 2024/03/29 17:27:55 by mvelazqu         ###   ########.fr       */
+/*   Updated: 2024/03/30 17:49:16 by mvelazqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,15 @@ t_cmd	*add_command(t_cmd **command_lst)
 	return (new);
 }
 
-t_cmd	*get_cmd_lst(int argc, char **argv)
+t_cmd	*get_cmd_lst(int argc, char **argv, char **envp)
 {
 	t_cmd	*command_lst;
 	t_cmd	*new_command;
 	char	**command_split;
 	int		i;
 
+	char	*envp2[] = {"PATH=/bin:/usr/bin", NULL};
+	envp = envp2;
 	i = 0;
 	command_lst = NULL;
 	while (i < argc)
@@ -82,6 +84,7 @@ t_cmd	*get_cmd_lst(int argc, char **argv)
 		if (!new_command)
 			return (free_split(command_split), NULL);
 		new_command->command = command_split;
+		printf("\nprogram: \"%s\"\n", command_split[0]);
 		new_command->exec_path = get_path(command_split[0], envp);
 		if (!new_command->exec_path)
 			return (free_commands(&command_lst), NULL);

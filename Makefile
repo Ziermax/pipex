@@ -1,13 +1,13 @@
 #<------------------------------------||-------------------------------------->#
 
 CC = gcc
-CFLAGS = #-Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 NAME = pipex
 LIBFT = Libft/libft.a
 
 #<------------------------------------||-------------------------------------->#
 
-SRC_F = pipex.c execute.c command.c
+SRC_F = pipex.c execute2.c command.c path.c
 SRC_D = ./sources/
 
 OBJ_F = ${SRC_F:.c=.o}
@@ -125,6 +125,9 @@ ${LIBFT}:
 	@make -C Libft --no-print-directory
 	@echo "${BCYAN}###${DF} ${PURPLE}libft.a${DF} ${BCYAN}made ---${DF}"
 	@echo
+
+lldb: ${LIBFT}
+	${CC} -g ${CFLAGS} ${SRC} ${LIBFT}
 
 #<------------------------------------||-------------------------------------->#
 

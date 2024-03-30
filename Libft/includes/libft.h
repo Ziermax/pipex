@@ -6,18 +6,26 @@
 /*   By: mvelazqu <mvelazqu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 17:01:12 by mvelazqu          #+#    #+#             */
-/*   Updated: 2024/03/29 14:12:19 by mvelazqu         ###   ########.fr       */
+/*   Updated: 2024/03/30 18:57:39 by mvelazqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
+# include <stdlib.h>
+# define MY_NULL (int *)0
+
+# define STR_START 1
+# define STR_ANY 2
+# define STR_END 4
+
 int		ft_strlen(char *str);
 int		ft_intlen(int num);
+char	*search_word_relative(char *word, char *str, int flag);
 char	*search_word_in_str(char *word, char *str);
 char	*search_word_in_split(char *word, char **split);
-void	*ft_calloc(size_t count, size_t size);
+void	*ft_calloc(int count, int size);
 void	free_split(char **split);
 void    free_split_save(char **split, char *save);
 char	*ft_strjoin(char *str1, char *str2);

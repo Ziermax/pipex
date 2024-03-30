@@ -6,12 +6,14 @@
 /*   By: mvelazqu <mvelazqu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 17:02:55 by mvelazqu          #+#    #+#             */
-/*   Updated: 2024/03/29 16:54:37 by mvelazqu         ###   ########.fr       */
+/*   Updated: 2024/03/30 15:15:26 by mvelazqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "../includes/libft.h"
+
+#include <stdio.h>
 
 char	*ft_strjoin(char *str1, char *str2)
 {
@@ -60,10 +62,21 @@ char	*ft_threejoin(char *str1, char *str2, char *str3)
 	i = -1;
 	while (++i < len1)
 		join[i] = str1[i];
-	while (i++ < len1 + len2)
+	i -= 1;
+	while (++i < len1 + len2)
 		join[i] = str2[i - len1];
-	while (i++ < len1 + len2 + len3)
+	i -= 1;
+	while (++i < len1 + len2 + len3)
 		join[i] = str3[i - len1 - len2];
 	join[i] = '\0';
 	return (join);
 }
+/*
+int	main(void)
+{
+	char	*str;
+
+	str = ft_threejoin("/bin", "/", "ls");
+	printf("path: \"%s\"\n", str);
+	free(str);
+}*/

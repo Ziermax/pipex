@@ -6,7 +6,7 @@
 /*   By: mvelazqu <mvelazqu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 16:40:12 by mvelazqu          #+#    #+#             */
-/*   Updated: 2024/03/29 17:28:12 by mvelazqu         ###   ########.fr       */
+/*   Updated: 2024/03/30 20:16:47 by mvelazqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
+
+# define READ 0
+# define WRITE 1
 
 typedef struct s_cmd
 {
@@ -32,14 +35,14 @@ typedef struct s_data
 
 typedef struct s_pipe
 {
-	int	p[2];
+	int	[2];
 }	t_pipe;
 
 void	print_split(char **split);
 void	free_commands(t_cmd **command_lst);
 int		command_len(t_cmd *command);
 char    *get_path(char *program, char **envp);
-t_cmd	*get_cmd_lst(int argc, char **argv);
+t_cmd	*get_cmd_lst(int argc, char **argv, char **envp);
 void	execute_command(t_cmd *commnad_lst, char **envp);
 
 #endif
