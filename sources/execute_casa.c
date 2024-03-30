@@ -1,25 +1,18 @@
 #include "../includes/pipex.h"
 #include "../Libft/includes/libft.h"
 
-void	free_pipes(int **pipes)
+void	free_pipes(int **pipes, int len)
 {
 	int	i;
 
 	if (!pipes)
 		return ;
 	i = 0;
-	printf("PIPE DIRF [%p]\n", pipes);
-	while (pipes[i])
+	while (i < len && pipes[i])
 	{
-		printf("i: %d, pipes[%d]: [%p]\n",i , i, pipes[i]);
-		printf("PIPE FREE [%p]\n", pipes[i]);
 		free(pipes[i]);
 		i++;
-		printf("PIPE DIRL [%p]\n", pipes);
 	}
-	printf("PIPE DIRF [%p]\n", pipes);
-	printf("Aqui esta el problema\n");
-	printf("PIPE FREE [%p]\n", pipes);
 	free(pipes);
 }
 
@@ -30,23 +23,18 @@ int	**create_pipes(int len, int len2)
 
 	if (len <= 0 || len2 <= 0)
 		return (NULL);
-	pipes = calloc(sizeof(int *), (len));
-	printf("PIPE MLLC [%p]\n", pipes);
+	pipes = malloc(sizeof(int *) * (len));
 	if (!pipes)
 		return (NULL);
 	i = 0;
 	while (i < len)
 	{
-		pipes[i] = (int *)calloc(sizeof(int) , len2);
+		pipes[i] = malloc(sizeof(int) * len2);
 		if (!pipes[i])
 			return (free_pipes(pipes), NULL);
-		printf("PIPE MLLC [%p]\n", pipes[i]);
 		i++;
 	}
-	printf("len: %d, i: %d, pipes[%d]: [%p]\n", len, i, i - 1, pipes[i - 1]);
 	pipes[i] = (int *)NULL;
-//	pipes[i] = (int *)MY_NULL;
-	printf("len: %d, i: %d, pipes[%d]: [%p]\n", len, i, i, pipes[i]);
 	return (pipes);
 }
 
@@ -61,12 +49,14 @@ void	manage_fd(int fd1, int fd2, int redirect)
 
 void	execute_program(t_cmd *command, char **envp, int **pipes, int i)
 {
+	int	j;
+
+	j = i - 1;
 	if (i != 0)
-		manage_fd(pipes[i - 1][1], pipes[i - 1][0], READ);
+		manage_fd(pipes[j][WR], pipes[j][RD], RD);
 	if (command->next)
-		manage_fd(pipes[i][0], pipes[i][1], WRITE);
+		manage_fd(pipes[i][RD], pipes[i][WR], WR);
 	execve(command->exec_path, command->command, envp);
-	exit(1);
 }
 
 void	execute_command(t_cmd *command, char **envp)
@@ -83,7 +73,6 @@ void	execute_command(t_cmd *command, char **envp)
 	i = 0;
 	while (i < len && command)
 	{
-	//	printf("%i: \"%s\" [%p]\n", i, command->exec_path, command->exec_path);
 		if (command->next)
 			pipe(pipes[i]);
 		pid = fork();
@@ -92,9 +81,7 @@ void	execute_command(t_cmd *command, char **envp)
 		if (i != 0)
 			manage_fd(pipes[i - 1][0], pipes[i - 1][1], -1);
 		command = command->next;
-		printf("PIPE DIR: [%p]\n", pipes);
 		i++;
 	}
-	printf("PIPE LAST [%p]\n", pipes);
-	free_pipes(pipes);
+	free_pipes(pipes, len);
 }
