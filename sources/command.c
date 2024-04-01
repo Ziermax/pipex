@@ -6,7 +6,7 @@
 /*   By: mvelazqu <mvelazqu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 13:00:24 by mvelazqu          #+#    #+#             */
-/*   Updated: 2024/03/30 17:49:16 by mvelazqu         ###   ########.fr       */
+/*   Updated: 2024/03/31 18:06:00 by mvelazqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	free_commands(t_cmd **command_lst)
 	while (aux)
 	{
 		tmp = aux->next;
-		free_split(aux->command);
+		free_split(aux->args);
 		free(aux->exec_path);
 		free(aux);
 		aux = tmp;
@@ -53,7 +53,7 @@ t_cmd	*add_command(t_cmd **command_lst)
 	new = malloc(sizeof(t_cmd));
 	if (!new)
 		return (free_commands(command_lst), NULL);
-	new->command = NULL;
+	new->args = NULL;
 	new->next = NULL;
 	if (!*command_lst)
 		return (*command_lst = new);
@@ -71,8 +71,6 @@ t_cmd	*get_cmd_lst(int argc, char **argv, char **envp)
 	char	**command_split;
 	int		i;
 
-	char	*envp2[] = {"PATH=/bin:/usr/bin", NULL};
-	envp = envp2;
 	i = 0;
 	command_lst = NULL;
 	while (i < argc)
@@ -83,8 +81,7 @@ t_cmd	*get_cmd_lst(int argc, char **argv, char **envp)
 		new_command = add_command(&command_lst);
 		if (!new_command)
 			return (free_split(command_split), NULL);
-		new_command->command = command_split;
-		printf("\nprogram: \"%s\"\n", command_split[0]);
+		new_command->args = command_split;
 		new_command->exec_path = get_path(command_split[0], envp);
 		if (!new_command->exec_path)
 			return (free_commands(&command_lst), NULL);
@@ -92,6 +89,3 @@ t_cmd	*get_cmd_lst(int argc, char **argv, char **envp)
 	}
 	return (command_lst);
 }
-//		printf("%d < %d\n", i, argc);
-//		printf("split: [%p]\n", command_split);
-//		printf("loop end\n");

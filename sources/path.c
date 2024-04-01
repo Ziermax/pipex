@@ -6,10 +6,12 @@
 /*   By: mvelazqu <mvelazqu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 16:43:19 by mvelazqu          #+#    #+#             */
-/*   Updated: 2024/03/30 17:39:57 by mvelazqu         ###   ########.fr       */
+/*   Updated: 2024/03/31 14:38:35 by mvelazqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+#include <unistd.h>
 #include "../Libft/includes/libft.h"
 
 char	**get_split_path(char **envp)
@@ -33,21 +35,21 @@ char	**get_split_path(char **envp)
 
 char	*find_correct_path(char **path)
 {
-	char	*correct;
-	int		i;
+	int	correct;
+	int	i;
 
 	i = 0;
 	while (path[i])
 	{
-		correct = search_word_relative("/bin/", path[i], STR_START);
-		if (correct)
+		correct = access(path[i], X_OK);
+		if (correct == 0)
 			return (path[i]);
 		i++;
 	}
 	return (NULL);
 }
+//		correct = search_word_relative("/bin/", path[i], STR_START);
 
-#include <stdio.h>
 char	*get_path(char *program, char **envp)
 {
 	char	**split_path;
@@ -61,10 +63,8 @@ char	*get_path(char *program, char **envp)
 	while (split_path[i])
 	{
 		path = ft_threejoin(split_path[i], "/", program);
-		printf("PATH: \"%s\" [%p]\n", path, path);
 		if (!path)
 			return (free_split(split_path), NULL);
-		printf("SOLO FREE %p\n", split_path[i]);
 		free(split_path[i]);
 		split_path[i] = path;
 		i++;
@@ -73,3 +73,6 @@ char	*get_path(char *program, char **envp)
 	free_split_save(split_path, path);
 	return (path);
 }
+//	printf("program: \"%s\"\n", program);
+//		printf("PATH: \"%s\" [%p]\n", path, path);
+//		printf("SOLO FREE %p\n", split_path[i]);

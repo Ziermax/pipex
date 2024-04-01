@@ -6,7 +6,7 @@
 /*   By: mvelazqu <mvelazqu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 17:07:00 by mvelazqu          #+#    #+#             */
-/*   Updated: 2024/03/30 17:38:08 by mvelazqu         ###   ########.fr       */
+/*   Updated: 2024/03/31 14:37:50 by mvelazqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ void	free_split(char **split)
 	free(split);
 }
 
-#include <stdio.h>
 void	free_split_save(char **split, char *save)
 {
 	int	i;
@@ -79,14 +78,12 @@ void	free_split_save(char **split, char *save)
 	while (split[i])
 	{
 		if (split[i] != save)
-		{
-			printf("SAVE FREE %p\n", split[i]);
 			free(split[i]);
-		}
 		i++;
 	}
 	free(split);
 }
+// printf("SAVE FREE %p\n", split[i]);
 
 char	**ft_split(char *str)
 {
