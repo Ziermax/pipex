@@ -57,14 +57,14 @@ UCYAN = \033[4;36m#		Cyan
 UWHITE = \033[4;37m#		White
 
 # Background
-On_BLACK = \033[40m#		Black
-On_RED = \033[41m#		Red
-On_GREEN = \033[42m#		Green
-On_YELLOW = \033[43m#		Yellow
-On_BLUE = \033[44m#		Blue
-On_PURPLE = \033[45m#		Purple
-On_CYAN = \033[46m#		Cyan
-On_WHITE = \033[47m#		White
+ON_BLACK = \033[40m#		Black
+ON_RED = \033[41m#		Red
+ON_GREEN = \033[42m#		Green
+ON_YELLOW = \033[43m#		Yellow
+ON_BLUE = \033[44m#		Blue
+ON_PURPLE = \033[45m#		Purple
+ON_CYAN = \033[46m#		Cyan
+ON_WHITE = \033[47m#		White
 
 # High Intensity
 IBLACK = \033[0;90m#		Black
@@ -87,14 +87,14 @@ BICYAN = \033[1;96m#		Cyan
 BIWHITE = \033[1;97m#		White
 
 # High Intensity backgrounds
-On_IBLACK = \033[0;100m#	Black
-On_IRED = \033[0;101m#		Red
-On_IGREEN = \033[0;102m#	Green
-On_IYELLOW = \033[0;103m#	Yellow
-On_IBLUE = \033[0;104m#		Blue
-On_IPURPLE = \033[0;105m#	Purple
-On_ICYAN = \033[0;106m#		Cyan
-On_IWHITE = \033[0;107m#	White
+ON_IBLACK = \033[0;100m#	Black
+ON_IRED = \033[0;101m#		Red
+ON_IGREEN = \033[0;102m#	Green
+ON_IYELLOW = \033[0;103m#	Yellow
+ON_IBLUE = \033[0;104m#		Blue
+ON_IPURPLE = \033[0;105m#	Purple
+ON_ICYAN = \033[0;106m#		Cyan
+ON_IWHITE = \033[0;107m#	White
 
 
 #<------------------------------------||-------------------------------------->#
@@ -103,7 +103,8 @@ all: ${NAME}
 
 ${NAME}: ${OBJ_D} ${DEP_D} ${OBJ} ${LIBFT}
 	@${CC} ${CFLAGS} ${OBJ} ${LIBFT} -o ${NAME}
-	@echo "${BCYAN}${CC}${DF} ${BBLUE}${CFLAGS}${DF} ${BIGREEN}${OBJ}${DF} ${PURPLE}${BCYAN}${DF}  ${BCYAN}-o${DF} ${RED}${NAME}${DF}"
+	@echo "${RED}Compiling progam:${DF}"
+	@echo "${BCYAN}${CC}${DF} ${BBLUE}${CFLAGS}${DF} ${BIGREEN}${OBJ_F}${DF} ${PURPLE}${LIBFT}${DF} ${BCYAN}-o${DF} ${RED}${NAME}${DF}"
 
 ${OBJ_D}%.o: ${SRC_D}%.c Makefile
 	@${CC} ${CFLAGS} -MMD -c $< -o $@
@@ -133,8 +134,8 @@ lldb: ${LIBFT}
 
 clean:
 	@rm -rf ${OBJ_D} ${DEP_D}
-	@echo "${RED}rm -rf${DF} ${BIGREEN}${OBJ_F}${DF}"
-	@echo "${RED}rm -rf${DF} ${BYELLOW}${DEP_F}${DF}"
+	@echo "${RED}rm -rf${DF} ${BIGREEN}OBJECTS: ${OBJ_F}${DF}"
+	@echo "${RED}rm -rf${DF} ${BYELLOW}DEPENDENCIES: ${DEP_F}${DF}"
 	@echo
 	@echo "${BCYAN}### LIBFT fclean ###${DF}"
 	@make fclean -C Libft --no-print-directory
@@ -143,7 +144,7 @@ clean:
 
 fclean: clean
 	@rm -rf ${NAME}
-	@echo "${RED}rm -rf${DF} ${RED}${NAME}${DF}"
+	@echo "${RED}rm -rf${DF} ${RED}PROGRAM: ${NAME}${DF}"
 
 re : fclean all
 

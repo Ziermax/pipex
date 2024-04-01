@@ -6,25 +6,22 @@
 /*   By: mvelazqu <mvelazqu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 15:16:22 by mvelazqu          #+#    #+#             */
-/*   Updated: 2024/03/31 17:59:06 by mvelazqu         ###   ########.fr       */
+/*   Updated: 2024/04/01 16:30:15 by mvelazqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 #include "../Libft/includes/libft.h"
 
-void	free_pipes(int **pipes, int len)
+void	free_pipes(int **pipes)
 {
 	int	i;
 
 	if (!pipes)
 		return ;
 	i = 0;
-	while (i < len && pipes[i])
-	{
-		free(pipes[i]);
-		i++;
-	}
+	while (pipes[i])
+		free(pipes[i++]);
 	free(pipes);
 }
 //		printf("FREE %d: [%p]\n", i, pipes[i]);
@@ -44,7 +41,7 @@ int	**create_pipes(int len, int len2)
 	{
 		pipes[i] = malloc(sizeof(int) * len2);
 		if (!pipes[i])
-			return (free_pipes(pipes, len), NULL);
+			return (free_pipes(pipes), NULL);
 		i++;
 	}
 	pipes[i] = NULL;
@@ -87,7 +84,7 @@ void	execute_command(t_cmd *command, char **envp)
 	i = 0;
 	while (command)
 	{
-		if (len > 1 && command->next)
+		if (command->next)
 			pipe(pipes[i]);
 		pid = fork();
 		if (pid == 0)
@@ -97,5 +94,5 @@ void	execute_command(t_cmd *command, char **envp)
 		command = command->next;
 		i++;
 	}
-	free_pipes(pipes, len);
+	free_pipes(pipes);
 }
