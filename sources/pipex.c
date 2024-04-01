@@ -6,7 +6,7 @@
 /*   By: mvelazqu <mvelazqu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 13:06:51 by mvelazqu          #+#    #+#             */
-/*   Updated: 2024/04/01 21:53:45 by mvelazqu         ###   ########.fr       */
+/*   Updated: 2024/04/01 23:04:06 by mvelazqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,31 +34,29 @@ void	print_commands(t_cmd *commands)
 	}
 }
 
-int	open_files(int argc, char **argv)
+int	open_files(int argc, char **argv, t_data *data)
 {
-	int	fd[2];
-
-	fd[0] = open(argv[1], O_RDONLY);
-	if (fd[0] == -1)
-		fd[0] = STDIN_FILENO;
-	dup2(fd[0], STDIN_FILENO);
-	if (fd[0] != STDIN_FILENO)
-		close(fd[0]);
-	fd[1] = open(argv[argc - 1], O_WRONLY | O_TRUNC | O_CREAT, 420);
-	if (fd [1] < 0)
+	data->fd[0] = open(argv[1], O_RDONLY);
+	if (data->fd[0] != -1)
+		dup2(data->fd[0], STDIN_FILENO);
+	if (data->fd[0] != STDIN_FILENO)
+		close(data->fd[0]);
+	data->fd[1] = open(argv[argc - 1], O_WRONLY | O_TRUNC | O_CREAT, 420);
+	if (data->fd [1] < 0)
 		return (-1);
-	dup2(fd[1], STDOUT_FILENO);
-	close(fd[1]);
+	dup2(data->fd[1], STDOUT_FILENO);
+	close(data->fd[1]);
 	return (0);
 }
 
 int	main(int argc, char **argv, char **envp)
 {
 	t_cmd	*cmd_lst;
+	t_data	data;
 
 	if (argc < 4)
 		return (0);
-	if (open_files(argc, argv) == -1)
+	if (open_files(argc, argv, &data) == -1)
 		return (write(2, "Could not open nor creat outfile\n", 33));
 	cmd_lst = get_cmd_lst(argc - 3, &argv[2], envp);
 	if (!cmd_lst)

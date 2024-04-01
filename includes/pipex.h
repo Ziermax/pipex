@@ -6,7 +6,7 @@
 /*   By: mvelazqu <mvelazqu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 16:40:12 by mvelazqu          #+#    #+#             */
-/*   Updated: 2024/04/01 16:13:39 by mvelazqu         ###   ########.fr       */
+/*   Updated: 2024/04/01 23:00:54 by mvelazqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ typedef struct s_data
 	t_cmd	*cmd_lst;
 	int		cmd_len;
 	int		**pipes;
+	int		fd[2];
 }	t_data;
-//	int		fd[2];
 
 void	print_split(char **split);
 void	free_commands(t_cmd **command_lst);
