@@ -6,13 +6,15 @@
 /*   By: mvelazqu <mvelazqu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 16:40:12 by mvelazqu          #+#    #+#             */
-/*   Updated: 2024/04/01 23:00:54 by mvelazqu         ###   ########.fr       */
+/*   Updated: 2024/04/02 16:18:22 by mvelazqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
 
+# include <sys/errno.h>
+# include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
@@ -34,6 +36,10 @@ typedef struct s_data
 	int		cmd_len;
 	int		**pipes;
 	int		fd[2];
+	char	*strerror_1;
+	int		errno_1;
+	char	*strerror_2;
+	int		errno_2;
 }	t_data;
 
 void	print_split(char **split);

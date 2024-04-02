@@ -1,53 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   length.c                                           :+:      :+:    :+:   */
+/*   putfd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvelazqu <mvelazqu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/28 17:09:23 by mvelazqu          #+#    #+#             */
-/*   Updated: 2024/04/02 18:25:03 by mvelazqu         ###   ########.fr       */
+/*   Created: 2024/04/02 20:31:13 by mvelazqu          #+#    #+#             */
+/*   Updated: 2024/04/02 20:47:20 by mvelazqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strlen(char *str)
-{
-	int	len;
+#include "../"
 
-	if (!str)
-		return (0);
-	len = 0;
-	while (str[len])
-		len++;
-	return (len);
+int	putchar(int fd, int c)
+{
+	return (write(fd, &c, 1));
 }
 
-int	ft_intlen(int num)
-{
-	int	len;
+int	:wq
 
-	if (!num)
-		return (1);
-	len = 0;
-	while (num)
-	{
-		len++;
-		num = num / 10;
-	}
-	return (len);
-}
-
-int	ft_untlen(unsigned int num)
-{
-	int	len;
-
-	if (!num)
-		return (1);
-	len = 0;
-	while (num)
-	{
-		len++;
-		num = num / 10;
-	}
-	return (len);
-}

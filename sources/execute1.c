@@ -6,7 +6,7 @@
 /*   By: mvelazqu <mvelazqu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 15:16:22 by mvelazqu          #+#    #+#             */
-/*   Updated: 2024/04/01 16:30:15 by mvelazqu         ###   ########.fr       */
+/*   Updated: 2024/04/02 16:21:48 by mvelazqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,31 @@ void	manage_fd(int fd1, int fd2, int redirect)
 	close(fd2);
 }
 
-void	execute_program(t_cmd *command, char **envp, int **pipes, int i)
+void	execute_program(t_cmd *command, char **envp, t_data dt, int i)
 {
 	int	j;
 
 	j = i - 1;
 	if (i != 0)
-		manage_fd(pipes[j][WR], pipes[j][RD], RD);
+		manage_fd(dt.pipes[j][WR], dt.pipes[j][RD], STDIN_FILENO);
+	else
+	{
+		if (dt.strerror_1)
+		{
+			write(2, dt.strerror_1, ft_strlen(dt.strerror_1));
+			exit(dt.errno_1);
+		}
+	}
 	if (command->next)
-		manage_fd(pipes[i][RD], pipes[i][WR], WR);
+		manage_fd(dt.pipes[i][RD], dt.pipes[i][WR], STDOUT_FILENO);
+	else
+	{
+		if (dt.strerror_2)
+		{
+			write(2, dt.strerror_2, ft_strlen(dt.strerror_2));
+			exit(dt.errno_2);
+		}
+	}
 	execve(command->exec_path, command->args, envp);
 }
 
@@ -78,7 +94,7 @@ void	execute_command(t_data dt, char **envp)
 
 	command = dt.cmd_lst;
 	dt.cmd_len = command_len(command);
-	dt.pipes = create_pipes(len, 2);
+	dt.pipes = create_pipes(dt.cmd_len, 2);
 	if (!dt.pipes)
 		return ;
 	i = 0;
@@ -88,7 +104,7 @@ void	execute_command(t_data dt, char **envp)
 			pipe(dt.pipes[i]);
 		pid = fork();
 		if (pid == 0)
-			return (execute_program(command, envp, dt.pipes, i));
+			return (execute_program(command, envp, dt, i));
 		if (i != 0)
 			manage_fd(dt.pipes[i - 1][0], dt.pipes[i - 1][1], -1);
 		command = command->next;

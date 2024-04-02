@@ -6,7 +6,7 @@
 /*   By: mvelazqu <mvelazqu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 17:01:12 by mvelazqu          #+#    #+#             */
-/*   Updated: 2024/03/31 14:32:35 by mvelazqu         ###   ########.fr       */
+/*   Updated: 2024/04/02 18:39:09 by mvelazqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 
 int		ft_strlen(char *str);
 int		ft_intlen(int num);
+int		ft_untlen(unsigned int num);
+int		ft_hexlen(unsigned int hex);
 char	*search_word_relative(char *word, char *str, int flag);
 char	*search_word_in_str(char *word, char *str);
 char	*search_word_in_split(char *word, char **split);
