@@ -41,6 +41,6 @@ void	free_commands(t_cmd **command_lst);
 int		command_len(t_cmd *command);
 char	*get_path(char *program, char **envp);
 t_cmd	*get_cmd_lst(int argc, char **argv, char **envp);
-void	execute_command(t_cmd *commnad_lst, char **envp);
+void	execute_command(t_data dt, char **envp);
 
 #endif
