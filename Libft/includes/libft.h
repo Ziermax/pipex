@@ -19,8 +19,6 @@
 
 int		ft_strlen(char *str);
 int		ft_intlen(int num);
-int		ft_untlen(unsigned int num);
-int		ft_hexlen(unsigned int hex);
 char	*search_word_relative(char *word, char *str, int flag);
 char	*search_word_in_str(char *word, char *str);
 char	*search_word_in_split(char *word, char **split);

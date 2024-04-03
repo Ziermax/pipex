@@ -12,8 +12,45 @@
 
 #include <stdarg.h>
 #include <unistd.h>
+#include "../includes/libft.h"
 
-int	fd_percentge(int fd, char c, va_list ap, int *len)
+static int	ft_lunglen(unsigned long hex)
+{
+	int len;
+
+	if (hex == 0)
+		return (1);
+	while (hex)
+	{
+		len++;
+		hex /= 16;
+	}
+	return (len);
+}
+
+static int	fd_printnbr(int fd, int nbr, int n)
+{
+	if (n == 'd' || n == 'i')
+	{
+		if (fd_putnbr(fd, nbr) == -1)
+			return (-1);
+		return(ft_intlen(nbr));
+	}
+	if (fd_putunbr(fd, (unsigned int)nbr) == -1)
+		return (-1);
+	return (ft_intlun(nbr));
+}
+
+static int	fd_printhex(int fd, int hex, int x)
+{
+	if (x == 'x' && fd_puthex(fd, hex) == -1)
+		return (-1);
+	else if (x == 'X' && fd_putchex(fd, hex) == -1)
+		return (-1);
+	return (ft_hexlen(hex));
+}
+
+static int	fd_percentge(int fd, char c, va_list ap, int *len)
 {
 	int	ret;
 
@@ -24,17 +61,13 @@ int	fd_percentge(int fd, char c, va_list ap, int *len)
 		ret = (fd_putstr(fd, va_arg(ap, char *)));
 	else if (c == 'p')
 		ret = (fd_printmem(fd, va_arg(ap, long)));
-	else if (c == 'd' || c == 'i')
-		ret = (fd_printnbr(fd, va_arg(ap, int)));
-	else if (c == 'u')
-		ret = (fd_printunbr(fd, va_arg(ap, unsigned int)));
+	else if (c == 'd' || c == 'i' || c == 'u')
+		ret = (fd_printnbr(fd, va_arg(ap, int), c));
 	else if (c == 'x' || c == 'X')
 		ret = (fd_printhex(fd, va_arg(ap, unsigned int)), c);
 	else if (c == '%')
 		ret = (fd_putchar(fd, '%'));
-	else
-		return (0);
-	len += ret;
+	*len += ret;
 	return (ret);
 }
 
