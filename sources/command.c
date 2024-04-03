@@ -6,7 +6,7 @@
 /*   By: mvelazqu <mvelazqu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 13:00:24 by mvelazqu          #+#    #+#             */
-/*   Updated: 2024/04/01 21:47:49 by mvelazqu         ###   ########.fr       */
+/*   Updated: 2024/04/03 19:49:09 by mvelazqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,26 +66,26 @@ t_cmd	*add_command(t_cmd **command_lst)
 
 t_cmd	*get_cmd_lst(int argc, char **argv, char **envp)
 {
-	t_cmd	*command_lst;
-	t_cmd	*new_command;
-	char	**command_split;
+	t_cmd	*cmd_lst;
+	t_cmd	*new_cmd;
+	char	**cmd_split;
 	int		i;
 
 	i = 0;
-	command_lst = NULL;
+	cmd_lst = NULL;
 	while (i < argc)
 	{
-		command_split = ft_split(argv[i]);
-		if (!command_split)
-			return (free_commands(&command_lst), NULL);
-		new_command = add_command(&command_lst);
-		if (!new_command)
-			return (free_split(command_split), NULL);
-		new_command->args = command_split;
-		new_command->exec_path = get_path(command_split[0], envp);
-		if (!new_command->exec_path)
-			return (free_commands(&command_lst), NULL);
+		cmd_split = ft_split(argv[i]);
+		if (!cmd_split)
+			return (free_commands(&cmd_lst), NULL);
+		new_cmd = add_command(&cmd_lst);
+		if (!new_cmd)
+			return (free_split(cmd_split), NULL);
+		new_cmd->args = cmd_split;
+		new_cmd->exec_path = get_path(cmd_split[0], envp);
+		if (!new_cmd->exec_path)
+			return (free_commands(&cmd_lst), NULL);
 		i++;
 	}
-	return (command_lst);
+	return (cmd_lst);
 }

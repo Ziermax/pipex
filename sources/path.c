@@ -6,13 +6,12 @@
 /*   By: mvelazqu <mvelazqu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 16:43:19 by mvelazqu          #+#    #+#             */
-/*   Updated: 2024/03/31 14:38:35 by mvelazqu         ###   ########.fr       */
+/*   Updated: 2024/04/03 18:59:49 by mvelazqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <unistd.h>
 #include "../Libft/includes/libft.h"
+#include "../includes/pipex.h"
 
 char	**get_split_path(char **envp)
 {
@@ -21,15 +20,15 @@ char	**get_split_path(char **envp)
 
 	path = search_word_in_split("PATH", envp);
 	if (!path)
-		return (NULL);
+		return (ft_calloc(sizeof(char *), 1));
 	path = search_word_in_str("=", path);
 	if (!path)
-		return (NULL);
+		return (ft_calloc(sizeof(char *), 1));
 	split_path = ft_split_char(&path[1], ':');
 	if (!split_path)
 		return (NULL);
-	if (!*split_path)
-		return (free_split(split_path), NULL);
+//	if (!*split_path)
+//		return (free_split(split_path), NULL);
 	return (split_path);
 }
 
@@ -56,6 +55,8 @@ char	*get_path(char *program, char **envp)
 	char	*path;
 	int		i;
 
+	if (!program)
+		return (ft_calloc(sizeof(char), 1));
 	split_path = get_split_path(envp);
 	if (!split_path)
 		return (NULL);
@@ -71,6 +72,8 @@ char	*get_path(char *program, char **envp)
 	}
 	path = find_correct_path(split_path);
 	free_split_save(split_path, path);
+	if (!path)
+		path = ft_strdup(program);
 	return (path);
 }
 //	printf("program: \"%s\"\n", program);

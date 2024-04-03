@@ -6,7 +6,7 @@
 /*   By: mvelazqu <mvelazqu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 16:40:12 by mvelazqu          #+#    #+#             */
-/*   Updated: 2024/04/02 16:18:22 by mvelazqu         ###   ########.fr       */
+/*   Updated: 2024/04/03 20:34:46 by mvelazqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PIPEX_H
 
 # include <sys/errno.h>
+# include <sys/wait.h>
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -33,20 +34,20 @@ typedef struct s_cmd
 typedef struct s_data
 {
 	t_cmd	*cmd_lst;
+	int		status;
 	int		cmd_len;
 	int		**pipes;
 	int		fd[2];
-	char	*strerror_1;
 	int		errno_1;
-	char	*strerror_2;
 	int		errno_2;
 }	t_data;
 
-void	print_split(char **split);
-void	free_commands(t_cmd **command_lst);
+void	free_pipes(int **pipes);
+int		**create_pipes(int len, int len2);
 int		command_len(t_cmd *command);
+void	free_commands(t_cmd **command_lst);
 char	*get_path(char *program, char **envp);
 t_cmd	*get_cmd_lst(int argc, char **argv, char **envp);
-void	execute_command(t_data dt, char **envp);
+void	execute_command(t_data *dt, char **envp);
 
 #endif

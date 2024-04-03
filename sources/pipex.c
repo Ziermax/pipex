@@ -6,7 +6,7 @@
 /*   By: mvelazqu <mvelazqu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 13:06:51 by mvelazqu          #+#    #+#             */
-/*   Updated: 2024/04/01 23:04:06 by mvelazqu         ###   ########.fr       */
+/*   Updated: 2024/04/03 17:21:06 by mvelazqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int	main(int argc, char **argv, char **envp)
 		return (write(2, "Error mallocking commands\n", 26));
 	execute_command(cmd_lst, envp);
 	free_commands(&cmd_lst);
+	return (errno);
 }
 //	print_commands(cmd_lst);
 //
