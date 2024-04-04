@@ -13,6 +13,13 @@
 #include "../includes/pipex.h"
 #include "../Libft/includes/libft.h"
 
+void	exit_free(t_data *data)
+{
+	free_pipes(&data->pipes);
+	free_commands(&data->cmd_lst);
+	perror("Forking")
+}
+
 void	manage_fd(int fd1, int fd2, int redirect)
 {
 	close(fd1);
@@ -32,12 +39,11 @@ void	execute_program(t_cmd *command, char **envp, t_data dt, int i)
 	if (i != 0)
 		manage_fd(dt.pipes[j][WR], dt.pipes[j][RD], STDIN_FILENO);
 	else
-
+		open_read_file(dt.infile, dt.heredoc, dt.limit);
 	if (command->next)
 		manage_fd(dt.pipes[i][RD], dt.pipes[i][WR], STDOUT_FILENO);
 	else
-		if (dt.fd[1] == -1)
-			exit(dt.errno_2);
+		open_write_file(dt.outfile, dt.heredoc);
 	execve(command->exec_path, command->args, envp);
 	fd_printf(2, "pipex: %s: %s\n", command->args[0], strerror(errno));
 	exit(errno);
@@ -60,7 +66,7 @@ void	execute_command(t_data *dt, char **envp)
 		}
 		pid = fork()
 		if (pid == -1)
-			perror("Forking");
+			exit_free(dt);
 		if (pid == 0)
 			return (execute_program(command, envp, *dt, i));
 		if (i != 0)

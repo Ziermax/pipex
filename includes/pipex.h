@@ -47,8 +47,10 @@ typedef struct s_data
 	int		errno_2;
 }	t_data;
 
-void	open_read_file(char *file, t_data *data);
-void	open_write_file(char *file, t_data *data);
+//void	open_read_file(char *file, t_data *data);
+//void	open_write_file(char *file, t_data *data);
+void	open_read_file(char *file, int heredoc, char *limit);
+void	open_write_file(char *file, int heredoc);
 void	here_doc(char *limit, t_data *data, char ***argv, int *argc);
 void	manage_fd(int fd1, int fd2, int redirect);
 void	free_pipes(int **pipes);
