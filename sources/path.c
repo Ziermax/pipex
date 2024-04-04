@@ -6,7 +6,7 @@
 /*   By: mvelazqu <mvelazqu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 16:43:19 by mvelazqu          #+#    #+#             */
-/*   Updated: 2024/04/03 18:59:49 by mvelazqu         ###   ########.fr       */
+/*   Updated: 2024/04/04 17:17:31 by mvelazqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ char	**get_split_path(char **envp)
 	split_path = ft_split_char(&path[1], ':');
 	if (!split_path)
 		return (NULL);
-//	if (!*split_path)
-//		return (free_split(split_path), NULL);
 	return (split_path);
 }
 
@@ -47,7 +45,6 @@ char	*find_correct_path(char **path)
 	}
 	return (NULL);
 }
-//		correct = search_word_relative("/bin/", path[i], STR_START);
 
 char	*get_path(char *program, char **envp)
 {
@@ -76,6 +73,3 @@ char	*get_path(char *program, char **envp)
 		path = ft_strdup(program);
 	return (path);
 }
-//	printf("program: \"%s\"\n", program);
-//		printf("PATH: \"%s\" [%p]\n", path, path);
-//		printf("SOLO FREE %p\n", split_path[i]);

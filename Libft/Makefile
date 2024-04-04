@@ -2,7 +2,7 @@ NAME = libft.a
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
-SRC_F = length.c search.c malloc.c split.c split_char.c join.c printf.c printf_utils.c putfd.c
+SRC_F = length.c search.c malloc.c split.c split_char.c join.c printf.c printf_utils.c putfd.c get_next_line.c get_next_line_utils.c
 SRC_D = ./sources/
 
 OBJ_F = ${SRC_F:.c=.o}
@@ -51,12 +51,12 @@ ${DEP_D}:
 
 clean:
 	@rm -rf ${OBJ_D} ${DEP_D}
-	@echo "${RED}rm -f${DF} ${BIGREEN}OBJECTS: ${OBJ_F}${DF}"
-	@echo "${RED}rm -f${DF} ${BYELLOW}DEPENDENCIES: ${DEP_F}${DF}"
+	@echo "${RED}rm -rf${DF} ${BIGREEN}OBJECTS: ${OBJ_F}${DF}"
+	@echo "${RED}rm -rf${DF} ${BYELLOW}DEPENDENCIES: ${DEP_F}${DF}"
 
 fclean: clean
-	@rm -f ${NAME}
-	@echo "${RED}rm -f${DF} ${PURPLE}LIBRARY: ${NAME}${DF}"
+	@rm -rf ${NAME}
+	@echo "${RED}rm -rf${DF} ${PURPLE}LIBRARY: ${NAME}${DF}"
 
 re: fclean all
 

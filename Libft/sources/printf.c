@@ -6,11 +6,18 @@
 /*   By: mvelazqu <mvelazqu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 17:18:41 by mvelazqu          #+#    #+#             */
-/*   Updated: 2024/04/03 15:38:08 by mvelazqu         ###   ########.fr       */
+/*   Updated: 2024/04/04 17:02:10 by mvelazqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/printf.h"
+
+static int	fd_printstr(int fd, char *str)
+{
+	if (!str)
+		return (write(fd, "(null)", 6));
+	return (fd_putstr(fd, str));
+}
 
 static int	fd_percentge(int fd, char c, va_list ap, int *len)
 {
@@ -20,7 +27,7 @@ static int	fd_percentge(int fd, char c, va_list ap, int *len)
 	if (c == 'c')
 		ret = fd_putchar(fd, va_arg(ap, int));
 	else if (c == 's')
-		ret = fd_putstr(fd, va_arg(ap, char *));
+		ret = fd_printstr(fd, va_arg(ap, char *));
 	else if (c == 'p')
 		ret = fd_printmem(fd, va_arg(ap, long));
 	else if (c == 'd' || c == 'i' || c == 'u')

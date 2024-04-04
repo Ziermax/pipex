@@ -6,12 +6,19 @@
 /*   By: mvelazqu <mvelazqu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 14:55:30 by mvelazqu          #+#    #+#             */
-/*   Updated: 2024/03/30 16:42:25 by mvelazqu         ###   ########.fr       */
+/*   Updated: 2024/04/04 17:02:47 by mvelazqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
 #include <stdio.h>
+
+int	ft_strcmp(char *str1, char *str2)
+{
+	while (*str1 && *str1 == *(str2++))
+		str1++;
+	return ((unsigned char)*str1 - (unsigned char)*str2);
+}
 
 char	*search_word_relative(char *word, char *str, int flag)
 {
@@ -19,6 +26,8 @@ char	*search_word_relative(char *word, char *str, int flag)
 	int	start;
 
 	if (!word || !str)
+		return (NULL);
+	if (flag == STR_START && word[0] != str[0])
 		return (NULL);
 	start = 0;
 	while (str[start])
