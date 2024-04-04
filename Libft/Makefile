@@ -2,7 +2,7 @@ NAME = libft.a
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
-SRC_F = length.c search.c malloc.c split.c split_char.c join.c printf.c printf_utils.c putfd.c get_next_line.c get_next_line_utils.c
+SRC_F = length.c search.c malloc.c join.c split.c split_char.c printf.c printf_utils.c putfd.c get_next_line.c get_next_line_utils.c
 SRC_D = ./sources/
 
 OBJ_F = ${SRC_F:.c=.o}

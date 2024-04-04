@@ -6,38 +6,48 @@
 /*   By: mvelazqu <mvelazqu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 13:06:51 by mvelazqu          #+#    #+#             */
-/*   Updated: 2024/04/04 20:54:59 by mvelazqu         ###   ########.fr       */
+/*   Updated: 2024/04/04 20:48:03 by mvelazqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 #include "../Libft/includes/libft.h"
 
+void	pexit(char *str, int error)
+{
+	write(2, str, ft_strlen(str));
+	exit(error);
+}
+
+void	rearrange_arg(int *argc, char ***argv)
+{
+	if (*argc < 6)
+		pexit("Wrong number of arguments\n", 0);
+	*argc -= 1;
+	*argv = &(*argv)[1];
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	t_data	data;
-	char	*outfile;
 
 	if (argc < 5)
-		return (fd_printf(2, "Wrong number of arguments\n"));
-	outfile = argv[argc - 1];
-	if (!ft_strcmp("here doc", argv[1]))
-	{
-		if (argc < 6)
-			return (fd_printf(2, "Wrong number of arguments\n"));
-		here_doc(argv[2], &data, &argv, &argc);
-	}
-	else
-		open_read_file(argv[1], &data);
-	open_write_file(outfile, &data);
+		pexit("Wrong number of arguments\n", 0);
+	data.infile = argv[1];
+	data.outfile = argv[argc - 1];
+	data.limit = argv[2];
+	data.heredoc = !ft_strcmp("here doc", argv[1]);
+	if (data.heredoc)
+		rearrange_arg(&argc, &argv);
 	data.cmd_lst = get_cmd_lst(argc - 3, &argv[2], envp);
 	if (!data.cmd_lst)
-		return (fd_printf(2, "Error mallocking commands\n"));
+		pexit("Error mallocking commands\n", 0);
 	data.cmd_len = command_len(data.cmd_lst);
 	data.pipes = create_pipes(data.cmd_len, 2);
 	if (!data.pipes)
-		perror("pipe mallocking");
+		pexit("Error mallocking pipes\n", errno);
 	execute_command(&data, envp);
+	free_pipes(&data.pipes);
 	free_commands(&data.cmd_lst);
 	return (data.status);
 }

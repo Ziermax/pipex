@@ -6,7 +6,7 @@
 /*   By: mvelazqu <mvelazqu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 16:40:12 by mvelazqu          #+#    #+#             */
-/*   Updated: 2024/04/04 17:44:02 by mvelazqu         ###   ########.fr       */
+/*   Updated: 2024/04/04 20:45:11 by mvelazqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 
 # define RD 0
 # define WR 1
+# define WNA "Wrong number of arguments\n"
 
 typedef struct s_cmd
 {
@@ -37,6 +38,10 @@ typedef struct s_data
 	int		status;
 	int		cmd_len;
 	int		**pipes;
+	int		heredoc;
+	char	*infile;
+	char	*outfile;
+	char	*limit;
 	int		fd[2];
 	int		errno_1;
 	int		errno_2;
