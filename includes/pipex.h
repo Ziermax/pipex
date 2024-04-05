@@ -6,7 +6,7 @@
 /*   By: mvelazqu <mvelazqu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 16:40:12 by mvelazqu          #+#    #+#             */
-/*   Updated: 2024/04/05 18:31:59 by mvelazqu         ###   ########.fr       */
+/*   Updated: 2024/04/05 19:54:49 by mvelazqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 
 # define RD 0
 # define WR 1
-# define WNA "Wrong number of arguments\n"
 
 typedef struct s_cmd
 {
@@ -35,23 +34,15 @@ typedef struct s_cmd
 typedef struct s_data
 {
 	t_cmd	*cmd_lst;
-	int		status;
-	int		cmd_len;
 	int		**pipes;
 	int		heredoc;
 	char	*infile;
 	char	*outfile;
 	char	*limit;
-	int		fd[2];
-	int		errno_1;
-	int		errno_2;
 }	t_data;
 
-//void	open_read_file(char *file, t_data *data);
-//void	open_write_file(char *file, t_data *data);
 void	open_read_file(char *file, int heredoc, char *limit);
 void	open_write_file(char *file, int heredoc);
-void	here_doc(char *limit);
 void	manage_fd(int fd1, int fd2, int redirect);
 void	free_pipes(int **pipes);
 int		**create_pipes(int len, int len2);
