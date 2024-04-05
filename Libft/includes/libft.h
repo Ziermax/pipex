@@ -6,7 +6,7 @@
 /*   By: mvelazqu <mvelazqu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 17:01:12 by mvelazqu          #+#    #+#             */
-/*   Updated: 2024/04/04 16:35:12 by mvelazqu         ###   ########.fr       */
+/*   Updated: 2024/04/05 18:06:15 by mvelazqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*ft_threejoin(char *str1, char *str2, char *str3);
 char	**ft_split_char(char *str, char c);
 char	**ft_split(char *str);
 int		fd_printf(int fd, char *str, ...);
-int		error_printf(int error, char *str, ...);
+void	error_printf(int error, char *str, ...);
 char	*get_next_line(int fd);
 
 #endif

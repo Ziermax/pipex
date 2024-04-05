@@ -6,7 +6,7 @@
 /*   By: mvelazqu <mvelazqu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 15:07:54 by mvelazqu          #+#    #+#             */
-/*   Updated: 2024/04/03 15:41:52 by mvelazqu         ###   ########.fr       */
+/*   Updated: 2024/04/05 18:06:53 by mvelazqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PRINTF_H
 
 # include <stdarg.h>
+# include <stdlib.h>
 # include <unistd.h>
 # include "libft.h"
 

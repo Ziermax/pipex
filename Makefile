@@ -7,8 +7,8 @@ LIBFT = Libft/libft.a
 
 #<------------------------------------||-------------------------------------->#
 
-SRC_F = pipex.c command.c path.p make_pipe.c redirect.c execute.c
-SRC_D = ./source2/
+SRC_F = pipex.c command.c path.c make_pipe.c redirect.c execute.c
+SRC_D = ./sources/
 
 OBJ_F = ${SRC_F:.c=.o}
 OBJ_D = ./objects/
