@@ -23,11 +23,8 @@ void	exit_free(t_data *data)
 void	manage_fd(int fd1, int fd2, int redirect)
 {
 	close(fd1);
-	if (redirect != -1)
-	{
-		if (dup2(fd2, redirect) == -1)
-			perror("dup2:");
-	}
+	if (redirect != -1 && dup2(fd2, redirect) == -1)
+		perror("dup2:");
 	close(fd2);
 }
 
@@ -59,11 +56,8 @@ void	execute_command(t_data *dt, char **envp)
 	i = 0;
 	while (command)
 	{
-		if (command->next)
-		{
-			if (pipe(dt->pipes[i]) == -1)
-				perror("Piping");
-		}
+		if (command->next && pipe(dt->pipes[i]) == -1)
+			perror("Piping");
 		pid = fork()
 		if (pid == -1)
 			exit_free(dt);

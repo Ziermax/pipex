@@ -69,7 +69,9 @@ void	open_read_file(char *file, int heredoc, char *limit)
 void	open_write_file(char *file, int heredoc)
 {
 	if (heredoc)
-		open_file(file, O_WRONLY | O_APPEND | O_CREAT, 420, STDOUT_FILENO);
+		open_file(file, O_WRONLY | O_APPEND | O_CREAT,
+			420, STDOUT_FILENO);
 	else
-		open_file(file, O_WRONLY | O_TRUNC | O_CREAT, 420, STDOUT_FILENO);
+		open_file(file, O_WRONLY | O_TRUNC | O_CREAT,
+			420, STDOUT_FILENO);
 }

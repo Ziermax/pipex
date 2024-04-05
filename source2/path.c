@@ -52,7 +52,7 @@ char	*get_path(char *program, char **envp)
 	char	*path;
 	int		i;
 
-	if (!program)
+	if (!program || !*program)
 		return (ft_calloc(sizeof(char), 1));
 	split_path = get_split_path(envp);
 	if (!split_path)

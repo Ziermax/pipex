@@ -7,8 +7,8 @@ LIBFT = Libft/libft.a
 
 #<------------------------------------||-------------------------------------->#
 
-SRC_F = pipex.c redirect.c execute.c command.c path.c pipe.c
-SRC_D = ./sources/
+SRC_F = pipex.c command.c path.p make_pipe.c redirect.c execute.c
+SRC_D = ./source2/
 
 OBJ_F = ${SRC_F:.c=.o}
 OBJ_D = ./objects/
@@ -100,6 +100,70 @@ ON_IWHITE = \033[0;107m#	White
 #<------------------------------------||-------------------------------------->#
 
 all: ${NAME}
+
+color:
+	@echo "${BLACK}Black${DF}"
+	@echo "${RED}Red${DF}"
+	@echo "${GREEN}Green${DF}"
+	@echo "${YELLOW}Yellow${DF}"
+	@echo "${BLUE}Blue${DF}"
+	@echo "${PURPLE}Purple${DF}"
+	@echo "${CYAN}Cyan${DF}"
+	@echo "${WHITE}White${DF}"
+	@echo
+	@echo "${BBLACK}BBlack${DF}"
+	@echo "${BRED}BRed${DF}"
+	@echo "${BGREEN}BGreen${DF}"
+	@echo "${BYELLOW}BYellow${DF}"
+	@echo "${BBLUE}BBlue${DF}"
+	@echo "${BPURPLE}BPurple${DF}"
+	@echo "${BCYAN}BCyan${DF}"
+	@echo "${BWHITE}BWhite${DF}"
+	@echo
+	@echo "${IBLACK}IBlack${DF}"
+	@echo "${IRED}IRed${DF}"
+	@echo "${IGREEN}IGreen${DF}"
+	@echo "${IYELLOW}IYellow${DF}"
+	@echo "${IBLUE}IBlue${DF}"
+	@echo "${IPURPLE}IPurple${DF}"
+	@echo "${ICYAN}ICyan${DF}"
+	@echo "${IWHITE}IWhite${DF}"
+	@echo
+	@echo "${BIBLACK}BIBlack${DF}"
+	@echo "${BIRED}BIRed${DF}"
+	@echo "${BIGREEN}BIGreen${DF}"
+	@echo "${BIYELLOW}BIYellow${DF}"
+	@echo "${BIBLUE}BIBlue${DF}"
+	@echo "${BIPURPLE}BIPurple${DF}"
+	@echo "${BICYAN}BICyan${DF}"
+	@echo "${BIWHITE}BIWhite${DF}"
+	@echo
+	@echo "${UBLACK}UBlack${DF}"
+	@echo "${URED}URed${DF}"
+	@echo "${UGREEN}UGreen${DF}"
+	@echo "${UYELLOW}UYellow${DF}"
+	@echo "${UBLUE}UBlue${DF}"
+	@echo "${UPURPLE}UPurple${DF}"
+	@echo "${UCYAN}UCyan${DF}"
+	@echo "${UWHITE}UWhite${DF}"
+	@echo
+	@echo "${ON_BLACK}ONBlack${DF}"
+	@echo "${ON_RED}ONRed${DF}"
+	@echo "${ON_GREEN}ONGreen${DF}"
+	@echo "${ON_YELLOW}ONYellow${DF}"
+	@echo "${ON_BLUE}ONBlue${DF}"
+	@echo "${ON_PURPLE}ONPurple${DF}"
+	@echo "${ON_CYAN}ONCyan${DF}"
+	@echo "${ON_WHITE}ONWhite${DF}"
+	@echo
+	@echo "${ON_IBLACK}ONIBlack${DF}"
+	@echo "${ON_IRED}ONIRed${DF}"
+	@echo "${ON_IGREEN}ONIGreen${DF}"
+	@echo "${ON_IYELLOW}ONIYellow${DF}"
+	@echo "${ON_IBLUE}ONIBlue${DF}"
+	@echo "${ON_IPURPLE}ONIPurple${DF}"
+	@echo "${ON_ICYAN}ONICyan${DF}"
+	@echo "${ON_IWHITE}ONIWhite${DF}"
 
 ${NAME}: ${OBJ_D} ${DEP_D} ${OBJ} ${LIBFT}
 	@${CC} ${CFLAGS} ${OBJ} ${LIBFT} -o ${NAME}
