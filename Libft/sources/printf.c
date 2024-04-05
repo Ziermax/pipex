@@ -57,13 +57,35 @@ int	fd_printf(int fd, char *str, ...)
 			return (va_end(ap), -1);
 		ret += i;
 		str = &str[i];
-		if (*str == '%')
-		{
-			if (fd_percentge(fd, *(++str), ap, &ret) == -1)
-				return (va_end(ap), -1);
-		}
+		if (*str == '%' && fd_percentge(fd, *(++str), ap, &ret) == -1)
+			return (va_end(ap), -1);
 		if (*str)
 			str++;
 	}
 	return (va_end(ap), ret);
+}
+
+void	error_printf(int error, char *str, ...)
+{
+	va_list	ap;
+	int		ret;
+	int		i;
+
+	ret = 0;
+	va_start(ap, str);
+	while (*str)
+	{
+		i = 0;
+		while (str[i] && str[i] != '%')
+			i++;
+		if (write(2, str, i) == -1)
+			return (va_end(ap), exit(error));
+		ret += i;
+		str = &str[i];
+		if (*str == '%' && fd_percentge(2, *(++str), ap, &ret) == -1)
+			return (va_end(ap), exit(error));
+		if (*str)
+			str++;
+	}
+	return (va_end(ap), exit(error));
 }

@@ -31,6 +31,7 @@ char	*ft_threejoin(char *str1, char *str2, char *str3);
 char	**ft_split_char(char *str, char c);
 char	**ft_split(char *str);
 int		fd_printf(int fd, char *str, ...);
+int		error_printf(int error, char *str, ...);
 char	*get_next_line(int fd);
 
 #endif
