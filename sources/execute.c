@@ -6,7 +6,7 @@
 /*   By: mvelazqu <mvelazqu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 15:16:22 by mvelazqu          #+#    #+#             */
-/*   Updated: 2024/04/05 18:05:37 by mvelazqu         ###   ########.fr       */
+/*   Updated: 2024/04/21 16:44:34 by mvelazqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	execute_command(t_data *dt, char **envp)
 			manage_fd(dt->pipes[i - 1][0], dt->pipes[i - 1][1], -1);
 		command = command->next;
 		i++;
-		wait(&pid);
 	}
+	while (i-- > 0)
+		wait(&pid);
 }

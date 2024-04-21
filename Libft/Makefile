@@ -19,11 +19,10 @@ DEP = ${addprefix ${DEP_D}, ${DEP_F}}
 
 DF = \033[0;39m#		Default
 RED= \033[0;31m#		Red
-PURPLE= \033[0;35m#		Purple
 BRED= \033[1;31m#		Bold Red
 BBLUE= \033[1;34m#		Bold Blue
 BYELLOW= \033[1;33m#	Bold Yellow
-BPURPLE= \033[1;35m#	Bold Purple
+BIPURPLE = \033[1;95m#	Purple
 BCYAN= \033[1;36m#		Bold Cyan
 BIRED= \033[1;91m#		Bold Intense Red
 BIGREEN= \033[1;92m#	Bold Intense Green
@@ -33,7 +32,7 @@ all: ${NAME}
 
 ${NAME}: ${OBJ_D} ${DEP_D} ${OBJ}
 	@ar -rc ${NAME} ${OBJ}
-	@echo "${BCYAN}ar -rc${DF} ${PURPLE}${NAME}${DF} ${BIGREEN}${OBJ_F}${DF}"
+	@echo "${BCYAN}ar -rc${DF} ${BIPURPLE}${NAME}${DF} ${BIGREEN}${OBJ_F}${DF}"
 
 ${OBJ_D}%.o: ${SRC_D}%.c Makefile
 	@${CC} ${CFLAGS} -MMD -c $< -o $@
@@ -56,7 +55,7 @@ clean:
 
 fclean: clean
 	@rm -rf ${NAME}
-	@echo "${RED}rm -rf${DF} ${PURPLE}LIBRARY: ${NAME}${DF}"
+	@echo "${RED}rm -rf${DF} ${BIPURPLE}LIBRARY: ${NAME}${DF}"
 
 re: fclean all
 
